@@ -5,9 +5,13 @@ def new
 end
 
 def create
-  #render json: params[:article] 
-  
+  # render plain: params[:article] 
+     
+  #  binding.pry
+     
   @article = Article.new(article_params)
+
+  #  binding.pry
   if @article.save   
     flash[:notice] = "Article Successfully created."
     redirect_to article_path(@article) 
