@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update] 
+  before_action :set_article, only: [:show, :edit, :update, :destroy] 
   def index 
     @article = Article.all
     render 'index'
@@ -10,8 +10,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    
     # render plain: params[:article] 
     @article = Article.new(article_params)
+    @article.user = User.first
     if @article.save   
       flash[:notice] = "Article Successfully created."
       redirect_to article_path(@article) 
@@ -42,7 +44,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flashp[:notice] = "Article was sucessfully deleted"
+    flash[:notice] = "Article was sucessfully deleted"
     redirect_to articles_path
   end
 
