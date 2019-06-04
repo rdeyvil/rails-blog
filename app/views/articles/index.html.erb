@@ -3,33 +3,32 @@
   <%= link_to 'SignUp Now',"#", class: "center btn btn-primary btn-lg" %> 
 </div>
 
-<h1>Listing all articles</h1>
-<p>
-  <%= link_to 'Create new article', new_article_path %>
-</p>
-
-<table>
-   
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-  </tr>
+<h1 align="center"> Listing All Articles</h1>
 
   <% @article.each do |item|%>
-    <tr>
-      <td> <%= item.title%> </td>
-      <td> <%= item.description%> </td>
-      <td> <small> Created by: <%= item.user.username%>,
-           <%= time_ago_in_words(item.created_at) %> ago,
-            Last Updated <%= time_ago_in_words(item.updated_at)%> ago </small> </td>
-           
-      <td> <%= link_to 'Edit', edit_article_path(item) %> <td>
-      <td> <%= link_to 'Show', article_path(item) %> <td>
-      <td> <%= link_to 'Delete', article_path(item), method: :delete, data: {confirm: "Are you sure to delete?"}%> </td>
-    </tr>
-  <%end%>
+   <div class = "row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="article-title">
+          <%= link_to item.title, article_path(item)%>
+        </div>
+        <div class = "article-body">
+          <%= truncate(item.description,length: 500)%> 
+        </div>
+      <div class="article-actions">
+        <%= link_to "Edit this article", edit_article_path(item),class: "btn btn-xs btn-primary"%>
+        <%= link_to "Delete this article", article_path(item), method: :delete, data:{confirm:"Are you sure you want to delete the article?"},
+                                  class: "btn btn-xs btn-primary"%>
 
-</table>
+
+
+           
+      </div>
+      </div>
+    </div> 
+  </div>  
+ <%end%>
+
 
 
 
