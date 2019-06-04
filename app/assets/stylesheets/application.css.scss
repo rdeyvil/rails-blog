@@ -29,9 +29,9 @@ margin: 0 auto;
 }
 
 .jumbotron {
-  background-image: asset-url('blogs.jpg');
+  background-image: asset-url('blog.png');
   background-size: cover;
-  height: 700px;
+  height: 500px;
 }
 
 .jumbotron h1 {
@@ -50,7 +50,7 @@ margin: 0 auto;
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
+  border-top: 3px solid #eaeaea;
   color: #777;
 }
 
