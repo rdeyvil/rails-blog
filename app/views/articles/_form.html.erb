@@ -1,12 +1,7 @@
 
+<%= render 'shared/errors', obj: @article %>  
 
-<% if @article.errors.any? %>
-  <ul>
-    <%= @article.errors.full_messages.each do |msg|%>
-    <li> <% msg %> </li>
-    <% end %>
-  </ul> 
-<% end %>
+     
 
     <div class='row'>
       <div class='col-xs-12'>
