@@ -5,9 +5,15 @@
 
 <h1 align="center"> Listing All Articles</h1>
 
+<div class="paginate" align="center">
+<%= will_paginate @article%>
+</div>
+
 <%= render 'articles/article', obj: @article%>
 
-
+<div class="paginate" align="center">
+<%= will_paginate @article%>
+</div>
 
 
  
