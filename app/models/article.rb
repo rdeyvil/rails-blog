@@ -3,4 +3,8 @@ class Article < ActiveRecord::Base
   validates :title, presence: true, length: {minimum:3, maximum:50}
   validates :description, presence: true, length: {minimum:10}
   validates :user_id, presence: true
+
+  def check_user_authorization(current_user)
+    user.id == current_user.id
+  end
 end

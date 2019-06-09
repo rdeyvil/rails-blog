@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  before_action :logged_in?, only:[:edit, :update]
+
+
   def index
     @user =  User.paginate(page: params[:page], per_page: 5)
     
@@ -24,18 +28,22 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:notice] = "Your account is sucessfully updated"
-      redirect_to articles_path
-    else
-    
-    end 
+      if @user.check_authorization(current_user)
+        if @user.update(user_params)
+          flash[:notice] = "Your account is sucessfully updated"
+          redirect_to articles_path
+      end 
+      else
+          flash[:alert] = "You are not authorized for this action"
+          redirect_to users_path
+    end
   end
 
   def show
     @user = User.find(params[:id])
     @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :password)

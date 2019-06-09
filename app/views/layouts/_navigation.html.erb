@@ -17,11 +17,12 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Actions
+        Actions
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% if logged_in? %>
           <%= link_to "New Article", new_article_path, class: "dropdown-item"%>
-      
+          <%end%>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
@@ -32,25 +33,40 @@
       <button class="btn btn-outline-success my-4 my-sm-0" type="submit">Search</button>
       </form>
      
-    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to 'LogOut',login_path, method: :delete, class: "nav-link"  %>
+          </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-      
-      
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          My Account 
+            </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <%= link_to 'View Profile',user_path(current_user), class: "dropdown-item"  %>
+        <%= link_to 'Edit Profile', edit_user_path(current_user), class: "dropdown-item"  %>
         </div>
-      </li>
+
+        <%else%>
+        
+          <li class="nav-item">
+            <%= link_to 'SignUp',signup_path, class: "nav-link"  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'LogIn',login_path, class: "nav-link" %>
+          </li>
+        <%end%>
       </ul>
+     </div> 
+    
+      
+
+      
+         
+
+
+
   </div>
 </nav>

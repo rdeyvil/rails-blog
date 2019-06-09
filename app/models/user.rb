@@ -11,5 +11,8 @@ class User < ApplicationRecord
             uniqueness: { case_sensetive: false },
             format: { with: VALID_EMAIL_REGEX }
   
+  def check_authorization(current_user)
+    id == current_user.id
+  end
   
 end
