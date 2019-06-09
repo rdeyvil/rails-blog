@@ -14,12 +14,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "User Successfully created \n Welcome #{@user.username}"
-      redirect_to articles_path
-    else
-      render 'new'
-    end
+      if @user.save
+        session[:user_id] = @user.id
+        flash[:notice] = "User Successfully created \n Welcome #{@user.username}"
+        redirect_to user_path(@user)
+      else
+        render 'new'
+      end
   end
   def edit
     @user = User.find(params[:id])
