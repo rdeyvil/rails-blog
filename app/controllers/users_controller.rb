@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :logged_in?, only:[:edit, :update]
-
+  before_action :require_admin, only:[:destroy]
 
   def index
     @user =  User.paginate(page: params[:page], per_page: 5)
@@ -43,6 +43,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+      if @user.check_authorization(current_user)  
+        @user.destroy
+        flash[:notice] = "User and all articles created by user have been deleted!"
+        redirect_to users_path
+      end
   end
 
   private

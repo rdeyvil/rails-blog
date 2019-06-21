@@ -12,7 +12,8 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX }
   
   def check_authorization(current_user)
-    id == current_user.id
+    id == current_user.id and !current_user.admin?
   end
+
   
 end

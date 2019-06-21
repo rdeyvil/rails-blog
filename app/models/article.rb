@@ -5,6 +5,6 @@ class Article < ActiveRecord::Base
   validates :user_id, presence: true
 
   def check_user_authorization(current_user)
-    user.id == current_user.id
+    user.id == current_user.id && !current_user.admin?
   end
 end
